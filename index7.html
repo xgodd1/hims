@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sorry Himu ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      font-family: 'Quicksand', sans-serif;
+      color: #4a002e;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.85);
+      border-radius: 25px;
+      padding: 30px 40px;
+      box-shadow: 0 10px 40px rgba(255, 51, 153, 0.4);
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #ff3b8e;
+      text-shadow: 0 2px 6px rgba(255, 51, 153, 0.7);
+    }
+
+    p {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    /* Image Carousel */
+    .image-carousel {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .image-carousel img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      animation: floatUpDown 4s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .image-carousel img:hover {
+      transform: scale(1.3);
+      box-shadow: 0 12px 40px rgba(255, 51, 153, 0.7);
+      animation-play-state: paused;
+    }
+
+    .image-carousel img::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);
+      transform: skewX(-25deg);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .image-carousel img:hover::after {
+      animation-play-state: paused;
+    }
+
+    @keyframes shimmer {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+
+    /* Buttons */
+    button {
+      cursor: pointer;
+      background: #ff3b8e;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 6px 15px rgba(255, 51, 142, 0.6);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      margin: 10px auto 0;
+      display: block;
+      user-select: none;
+    }
+
+    button:hover {
+      background: #ff6ba3;
+      box-shadow: 0 8px 25px rgba(255, 51, 142, 0.85);
+    }
+
+    /* Surprise message boxes */
+    .surprise-message, #quoteBox, #finalMessage {
+      display: none;
+      background: #fff0f7;
+      padding: 18px 25px;
+      margin-top: 20px;
+      border-radius: 20px;
+      font-size: 1.2rem;
+      box-shadow: 0 8px 30px rgba(255, 51, 142, 0.15);
+      color: #a01a5e;
+      user-select: none;
+      line-height: 1.4;
+    }
+
+    /* Hearts animation */
+    .heart {
+      position: fixed;
+      font-size: 18px;
+      animation-name: floatHearts;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      color: #ff3b8e;
+      pointer-events: none;
+      z-index: 5;
+      user-select: none;
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-30px); opacity: 0.7; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Confetti */
+    .confetti-piece {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #ff3b8e;
+      opacity: 0.9;
+      border-radius: 3px;
+      animation-name: confettiFall;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      user-select: none;
+      z-index: 5;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Typing effect for final message */
+    .typing {
+      display: inline-block;
+      border-right: 2px solid #ff3b8e;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 3s steps(30) forwards, blink 0.75s step-end infinite alternate;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    /* Extra button styles */
+    .extra-btn, .final-btn {
+      background: #ff6ba3;
+      margin-top: 15px;
+    }
+
+    /* New play/pause button style */
+    #musicToggleBtn {
+      font-size: 1.3rem;
+      padding: 14px 36px;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" loop>
+    <source src="ekksasi.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="confetti" id="confetti"></div>
+
+  <div class="container">
+    <div class="image-carousel">
+      <img src="himu1.jpg" alt="Himu 1" />
+      <img src="himu2.jpg" alt="Himu 2" />
+      <img src="himu3.jpg" alt="Himu 3" />
+      <img src="himu4.jpg" alt="Himu 4" />
+      <img src="himu5.jpg" alt="Himu 5" />
+    </div>
+
+    <!-- Play/Pause Music Button -->
+    <button id="musicToggleBtn">▶️ Play Music</button>
+
+    <h1>Sorry Himu ❤️</h1>
+
+    <p>
+      I know I broke your heart and I'm so deeply sorry. You mean everything to me, and I can’t bear the thought of losing you. You deserve love, care, and honesty — and I promise to give you all that and more. Please forgive me, my love.
+    </p>
+
+    <button class="surprise-btn" onclick="showSurprise()">Click for a Surprise 💝</button>
+
+    <div class="surprise-message" id="surprise">
+      🌟 You are my everything, Himu. Life without your smile is like a sky without stars. I’ll do anything to bring your happiness back. 🌟<br /><br />
+      <button class="extra-btn" onclick="showQuote()">Tap for a Secret Message ✨</button>
+
+      <div class="quote-box" id="quoteBox">
+        "Even in silence, your name is the loudest sound in my heart."<br /><br />
+        <button class="final-btn" onclick="showFinal()">Final Surprise 💫</button>
+        <div class="final-message" id="finalMessage"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Hearts floating
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = Math.random() * 100 + 'vh';
+      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+      heart.innerText = '💖';
+      document.body.appendChild(heart);
+    }
+
+    // Confetti pieces
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDelay = Math.random() * 5 + 's';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+      confetti.style.width = confetti.style.height = (5 + Math.random() * 10) + 'px';
+      document.getElementById('confetti').appendChild(confetti);
+    }
+
+    // Show surprise message
+    function showSurprise() {
+      document.getElementById('surprise').style.display = 'block';
+    }
+
+    // Show quote box
+    function showQuote() {
+      document.getElementById('quoteBox').style.display = 'block';
+    }
+
+    // Show final surprise with typing effect
+    function showFinal() {
+      const final = document.getElementById('finalMessage');
+      final.style.display = 'block';
+      const text = "💖 I'll keep choosing you in every lifetime. You are my forever, Himu. 💖";
+      let i = 0;
+      final.innerHTML = '';
+      function typeWriter() {
+        if (i < text.length) {
+          final.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 70);
+        }
+      }
+      typeWriter();
+
+      // Sparkle hearts animation
+      for (let i = 0; i < 30; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'heart';
+        sparkle.innerText = '💖';
+        sparkle.style.left = Math.random() * 100 + 'vw';
+        sparkle.style.top = '90vh';
+        sparkle.style.fontSize = (12 + Math.random() * 20) + 'px';
+        sparkle.style.animationDuration = (2 + Math.random() * 3) + 's';
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 4000);
+      }
+    }
+
+    // Audio play/pause toggle
+    const audio = document.getElementById('bg-music');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+
+    // Auto play audio after 5 seconds
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        audio.play().catch(() => {
+          console.log('Autoplay was prevented');
+          // If autoplay blocked, user must press play
+          musicToggleBtn.textContent = '▶️ Play Music';
+        });
+        musicToggleBtn.textContent = '⏸️ Pause Music';
+      }, 5000);
+    });
+
+    musicToggleBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        musicToggleBtn.textContent = '⏸️ Pause Music';
+      } else {
+        audio.pause();
+        musicToggleBtn.textContent = '▶️ Play Music';
+      }
+    });
+  </script>
+</body>
+</html>
